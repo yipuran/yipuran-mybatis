@@ -2,7 +2,7 @@
 mybatis used application
 
 ## Dependency
-https://github.com/yipuran/yipuran-core
+https://github.com/yipuran/yipuran-core <br/>
 mybatis
 
 ## Document
