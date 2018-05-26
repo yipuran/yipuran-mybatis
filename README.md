@@ -7,6 +7,7 @@ mybatis
 
 ## Document
 Extract doc/yipuran-mybatis-doc.zip and see the Javadoc
+or [Wiki Page](../../wiki)
 
 ## Setup pom.xml
 ```
