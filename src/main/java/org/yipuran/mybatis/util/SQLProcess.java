@@ -94,7 +94,7 @@ public class SQLProcess{
 	 * @param settingJson mybatis setting情報をMapで指定する
 	 * @since 4.21
 	 */
-	public SQLProcess(String settingJson, Map<String, Object> settingmap){
+	public SQLProcess(Map<String, Object> settingmap){
 		this.settingmap = settingmap;
 	}
 	/**
