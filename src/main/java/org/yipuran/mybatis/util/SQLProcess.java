@@ -1,5 +1,8 @@
 package org.yipuran.mybatis.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.sql.DataSource;
 
 import org.apache.ibatis.datasource.unpooled.UnpooledDataSource;
@@ -11,7 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.yipuran.function.ThrowableConsumer;
 import org.yipuran.function.ThrowableFunction;
-
+import org.yipuran.util.Fieldsetter;
 /**
  * SQLProcess.
  * <PRE>
@@ -54,17 +57,23 @@ import org.yipuran.function.ThrowableFunction;
  *    SQLProcess proc = new SQLProcess();
  *    proc.setDatasource(source);
  *
+ * mybatis setting 情報の適用
+ * バージョン 4.21 から、mapUnderscoreToCamelCase などを指定する
+ *  setting情報を Map&lt;String, Object&gt; で指定したコンストラクタが用意されています。
  * </PRE>
  * @since 4.2
  */
 public class SQLProcess{
 	private DataSource datasource;
+	private Map<String, Object> settingmap;
 	/**
 	 * コンストラクタ.
 	 */
-	public SQLProcess(){}
+	public SQLProcess(){
+		settingmap = new HashMap<>();
+	}
 	/**
-	 * コンストラクタ.
+	 * コンストラクタ（接続情報指定）.
 	 * @param driver JDBCドライバ
 	 * @param url 接続URL
 	 * @param user 接続ユーザ名
@@ -78,6 +87,34 @@ public class SQLProcess{
 		d.setPassword(password);
 		d.setAutoCommit(false);
 		datasource = d;
+		settingmap = new HashMap<>();
+	}
+	/**
+	 * コンストラクタ（setting指定）.
+	 * @param settingJson mybatis setting情報をMapで指定する
+	 * @since 4.21
+	 */
+	public SQLProcess(String settingJson, Map<String, Object> settingmap){
+		this.settingmap = settingmap;
+	}
+	/**
+	 * コンストラクタ（接続情報, setting指定）.
+	 * @param driver JDBCドライバ
+	 * @param url 接続URL
+	 * @param user 接続ユーザ名
+	 * @param password 接続パスワード
+	 * @param settingJson mybatis setting情報をMapで指定する
+	 * @since 4.21
+	 */
+	public SQLProcess(String driver, String url, String user, String password, Map<String, Object> settingmap){
+		UnpooledDataSource d = new UnpooledDataSource();
+		d.setDriver(driver);
+		d.setUrl(url);
+		d.setUsername(user);
+		d.setPassword(password);
+		d.setAutoCommit(false);
+		datasource = d;
+		this.settingmap = settingmap;
 	}
 	/**
 	 * 接続 Datasouceを設定.
@@ -96,6 +133,11 @@ public class SQLProcess{
 	public void accept(Class<?> mapper, ThrowableConsumer<SqlSession> c){
 		Environment environment = new Environment("deployment", new JdbcTransactionFactory(), datasource);
 		Configuration config = new Configuration(environment);
+		if (settingmap.size() > 0){
+			settingmap.entrySet().forEach(e->{
+				Fieldsetter.of((t, u)->e.getKey()).accept(config, e.getValue());
+			});
+		}
 		config.addMapper(mapper);
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(config);
 		try(SqlSession session = factory.openSession()){
@@ -114,6 +156,11 @@ public class SQLProcess{
 	public void acceptUpdate(Class<?> mapper, ThrowableConsumer<SqlSession> c){
 		Environment environment = new Environment("deployment", new JdbcTransactionFactory(), datasource);
 		Configuration config = new Configuration(environment);
+		if (settingmap.size() > 0){
+			settingmap.entrySet().forEach(e->{
+				Fieldsetter.of((t, u)->e.getKey()).accept(config, e.getValue());
+			});
+		}
 		config.addMapper(mapper);
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(config);
 		SqlSession session = null;
@@ -136,6 +183,11 @@ public class SQLProcess{
 	public <R> R apply(Class<?> mapper, ThrowableFunction<SqlSession, R> c){
 		Environment environment = new Environment("deployment", new JdbcTransactionFactory(), datasource);
 		Configuration config = new Configuration(environment);
+		if (settingmap.size() > 0){
+			settingmap.entrySet().forEach(e->{
+				Fieldsetter.of((t, u)->e.getKey()).accept(config, e.getValue());
+			});
+		}
 		config.addMapper(mapper);
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(config);
 		try(SqlSession session = factory.openSession()){
@@ -155,6 +207,11 @@ public class SQLProcess{
 	public <R> R applyUpdate(Class<?> mapper, ThrowableFunction<SqlSession, R> c){
 		Environment environment = new Environment("deployment", new JdbcTransactionFactory(), datasource);
 		Configuration config = new Configuration(environment);
+		if (settingmap.size() > 0){
+			settingmap.entrySet().forEach(e->{
+				Fieldsetter.of((t, u)->e.getKey()).accept(config, e.getValue());
+			});
+		}
 		config.addMapper(mapper);
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(config);
 		SqlSession session = null;
