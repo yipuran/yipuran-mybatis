@@ -6,7 +6,7 @@ import java.util.Stack;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.yipuran.xml.AbstractXmlHandler;
+//import org.yipuran.xml.AbstractXmlHandler;
 /**
  * Configration.xml XML parse Handler.
  */

@@ -3,8 +3,8 @@ package org.yipuran.mybatis.spi;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yipuran.xml.AbstractXmlHandler;
-import org.yipuran.xml.XmlParser;
+//import org.yipuran.xml.AbstractXmlHandler;
+//import org.yipuran.xml.XmlParser;
 /**
  * Configuration.xml spi.
  * for get enviromtent name

@@ -2,7 +2,7 @@
 <modelVersion>4.0.0</modelVersion>
 <groupId>org.yipuran.mybatis</groupId>
 <artifactId>yipuran-mybatis</artifactId>
-<version>4.3</version>
+<version>4.4</version>
 
 <name>yipuran-mybatis</name>
 <url>https://github.com/yipuran/yipuran-mybatis</url>
@@ -11,6 +11,7 @@
 <properties>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<github.global.server>github</github.global.server>
+	<guice.version>4.2.2</guice.version>
 </properties>
 
 <repositories>
@@ -32,13 +33,25 @@
 	<dependency>
 		<groupId>org.mybatis</groupId>
 		<artifactId>mybatis</artifactId>
-		<version>3.5.2</version>
+		<version>3.5.5</version>
 	</dependency>
 	<dependency>
-		<groupId>org.yipuran.core</groupId>
-		<artifactId>yipuran-core</artifactId>
-		<version>4.23</version>
-	</dependency>
+      <groupId>aopalliance</groupId>
+      <artifactId>aopalliance</artifactId>
+      <version>1.0</version>
+   </dependency>
+   <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <version>1</version>
+   </dependency>
+
+   <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>${guice.version}</version>
+   </dependency>
+
 </dependencies>
 <build>
 	<plugins>

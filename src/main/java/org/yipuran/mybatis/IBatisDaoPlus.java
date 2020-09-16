@@ -10,8 +10,6 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 /**
  * IBatisDaoPlus  IBatisDao を継承したselect拡張追加.
  * <PRE>
@@ -42,8 +40,6 @@ public abstract class IBatisDaoPlus extends IBatisDao{
 				}
 			});
 		}catch(Exception e){
-			Logger logger = LoggerFactory.getLogger(this.getClass());
-			logger.warn("## IBatisDaoPlus.selectBounds(sqlid,offset,limit) : " + e.getMessage(), e);
 			SqlSession session = factory.openSession();
 			session.select(sqlid, null, new RowBounds(offset, limit), new ResultHandler(){
 				@SuppressWarnings("unchecked")
@@ -78,8 +74,6 @@ public abstract class IBatisDaoPlus extends IBatisDao{
 				}
 			});
 		}catch(Exception e){
-			Logger logger = LoggerFactory.getLogger(this.getClass());
-			logger.warn("## IBatisDaoPlus.selectBounds(sqlid,offset,param,limit) : " + e.getMessage(), e);
 			SqlSession session = factory.openSession();
 			session.select(sqlid, param, new RowBounds(offset, limit), new ResultHandler(){
 				@SuppressWarnings("unchecked")

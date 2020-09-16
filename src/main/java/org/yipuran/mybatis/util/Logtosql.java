@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.yipuran.regex.RegExpress;
+//import org.yipuran.regex.RegExpress;
 
 /**
  * JDBCログ結果から SQL文生成.

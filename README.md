@@ -22,7 +22,20 @@ or [Wiki Page](../../wiki)
     <dependency>
         <groupId>org.yipuran.mybatis</groupId>
         <artifactId>yipuran-mybatis</artifactId>
-        <version>4.3</version>
+        <version>4.4</version>
     </dependency>
 </dependencies>
+```
+
+
+## Setup gradle
+```
+repositories {
+    mavenCentral()
+    maven { url 'https://raw.github.com/yipuran/yipuran-mybatis/mvn-repo'  }
+}
+
+dependencied {
+    compile 'org.yipuran.mybatis:yipuran-mybatis:4.4'
+}
 ```
