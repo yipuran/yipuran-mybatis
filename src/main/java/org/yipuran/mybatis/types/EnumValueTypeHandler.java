@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
@@ -21,9 +22,8 @@ public class EnumValueTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E>{
 	 * コンストラクタ.
 	 * @param cls enumクラス
 	 */
-	@SuppressWarnings("unchecked")
-	public EnumValueTypeHandler(Class<E> cls) {
-		this.cls = (Class<EnumBase<E>>) cls;
+	public EnumValueTypeHandler(Class<EnumBase<E>> cls) {
+		this.cls = cls;
 	}
 	@SuppressWarnings("unchecked")
 	@Override
@@ -34,16 +34,34 @@ public class EnumValueTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E>{
 			ps.setObject(i, ((EnumBase<E>)parameter).getValue());
 		}
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public E getNullableResult(ResultSet rs, String columnName) throws SQLException{
-		return EnumBase.parseCode(cls, rs.getInt(columnName)).orElse(null);
+		try {
+			Object o = rs.getInt(columnName);
+			return (E) Arrays.stream(cls.getEnumConstants()).filter(e->e.getValue().equals(o)).findAny().orElse(null);
+		}catch(SQLException e) {
+			throw e;
+		}
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public E getNullableResult(ResultSet rs, int columnIndex) throws SQLException{
-		return EnumBase.parseCode(cls, rs.getInt(columnIndex)).orElse(null);
+		try {
+			Object o = rs.getInt(columnIndex);
+			return (E) Arrays.stream(cls.getEnumConstants()).filter(e->e.getValue().equals(o)).findAny().orElse(null);
+		}catch(SQLException e) {
+			throw e;
+		}
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public E getNullableResult(CallableStatement cs, int columnIndex) throws SQLException{
-		return EnumBase.parseCode(cls, cs.getInt(columnIndex)).orElse(null);
+		try {
+			Object o = cs.getInt(columnIndex);
+			return (E) Arrays.stream(cls.getEnumConstants()).filter(e->e.getValue().equals(o)).findAny().orElse(null);
+		}catch(SQLException e) {
+			throw e;
+		}
 	}
 }
