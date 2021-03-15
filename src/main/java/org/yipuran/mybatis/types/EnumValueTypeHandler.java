@@ -38,7 +38,7 @@ public class EnumValueTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E>{
 	@Override
 	public E getNullableResult(ResultSet rs, String columnName) throws SQLException{
 		try {
-			Object o = rs.getInt(columnName);
+			Object o = rs.getObject(columnName);
 			return (E) Arrays.stream(cls.getEnumConstants()).filter(e->e.getValue().equals(o)).findAny().orElse(null);
 		}catch(SQLException e) {
 			throw e;
@@ -48,7 +48,7 @@ public class EnumValueTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E>{
 	@Override
 	public E getNullableResult(ResultSet rs, int columnIndex) throws SQLException{
 		try {
-			Object o = rs.getInt(columnIndex);
+			Object o = rs.getObject(columnIndex);
 			return (E) Arrays.stream(cls.getEnumConstants()).filter(e->e.getValue().equals(o)).findAny().orElse(null);
 		}catch(SQLException e) {
 			throw e;
@@ -58,7 +58,7 @@ public class EnumValueTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E>{
 	@Override
 	public E getNullableResult(CallableStatement cs, int columnIndex) throws SQLException{
 		try {
-			Object o = cs.getInt(columnIndex);
+			Object o = cs.getObject(columnIndex);
 			return (E) Arrays.stream(cls.getEnumConstants()).filter(e->e.getValue().equals(o)).findAny().orElse(null);
 		}catch(SQLException e) {
 			throw e;
