@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  * 継承先で com.fasterxml.jackson.databind.module.SimpleModule を返す抽象メソッドで
  * 任意のJSONシリアライザまたは、JSONデシリアライザを設定することが可能である。
  * </PRE>
+ * @since 4.7
  */
 @MappedJdbcTypes(JdbcType.VARCHAR)
 public abstract class AbstractJsonTypeHandler<T> extends BaseTypeHandler<T> {
