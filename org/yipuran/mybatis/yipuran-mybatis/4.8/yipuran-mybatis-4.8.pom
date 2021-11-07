@@ -2,7 +2,7 @@
 <modelVersion>4.0.0</modelVersion>
 <groupId>org.yipuran.mybatis</groupId>
 <artifactId>yipuran-mybatis</artifactId>
-<version>4.6</version>
+<version>4.8</version>
 
 <name>yipuran-mybatis</name>
 <url>https://github.com/yipuran/yipuran-mybatis</url>
@@ -11,15 +11,8 @@
 <properties>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<github.global.server>github</github.global.server>
-	<guice.version>4.2.2</guice.version>
+	<guice.version>5.0.1</guice.version>
 </properties>
-
-<repositories>
-	<repository>
-		<id>yipuran-core</id>
-		<url>https://raw.github.com/yipuran/yipuran-core/mvn-repo</url>
-	</repository>
-</repositories>
 
 <distributionManagement>
 	<repository>
@@ -33,7 +26,7 @@
 	<dependency>
 		<groupId>org.mybatis</groupId>
 		<artifactId>mybatis</artifactId>
-		<version>3.5.6</version>
+		<version>[3.5.6,)</version>
 	</dependency>
 	<dependency>
       <groupId>aopalliance</groupId>
@@ -45,13 +38,16 @@
       <artifactId>javax.inject</artifactId>
       <version>1</version>
    </dependency>
-
    <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
       <version>${guice.version}</version>
    </dependency>
-
+   <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>[2.12.4,)</version>
+    </dependency>
 </dependencies>
 <build>
 	<plugins>
@@ -68,17 +64,12 @@
 			<artifactId>site-maven-plugin</artifactId>
 			<version>0.12</version>
 			<configuration>
-				<!-- Git コミットメッセージ -->
 				<message>Maven artifacts for ${project.version}</message>
 				<noJekyll>true</noJekyll>
-				<!-- distributionManagement の url と一致させる -->
 				<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-				<!-- リモートブランチ名 -->
 				<branch>refs/heads/mvn-repo</branch>
 				<includes><include>**/*</include></includes>
-				<!-- Github リポジトリ名 -->
 				<repositoryName>yipuran-mybatis</repositoryName>
-				<!-- Github リポジトリユーザー名 -->
 				<repositoryOwner>yipuran</repositoryOwner>
 			</configuration>
 			<executions>
