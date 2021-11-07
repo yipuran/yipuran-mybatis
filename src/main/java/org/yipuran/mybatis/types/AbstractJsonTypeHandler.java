@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  */
 @MappedJdbcTypes(JdbcType.VARCHAR)
 public abstract class AbstractJsonTypeHandler<T> extends BaseTypeHandler<T> {
-	private static ObjectMapper mapper;
+	private ObjectMapper mapper;
 	private Class<T> clazz;
 	public abstract SimpleModule getModule();
 	/**

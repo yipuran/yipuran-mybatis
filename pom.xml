@@ -2,7 +2,7 @@
 <modelVersion>4.0.0</modelVersion>
 <groupId>org.yipuran.mybatis</groupId>
 <artifactId>yipuran-mybatis</artifactId>
-<version>4.7</version>
+<version>4.8</version>
 
 <name>yipuran-mybatis</name>
 <url>https://github.com/yipuran/yipuran-mybatis</url>
@@ -11,7 +11,7 @@
 <properties>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<github.global.server>github</github.global.server>
-	<guice.version>4.2.2</guice.version>
+	<guice.version>5.0.1</guice.version>
 </properties>
 
 <distributionManagement>
