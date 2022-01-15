@@ -21,7 +21,7 @@ or [Wiki Page](../../wiki)
     <dependency>
         <groupId>org.yipuran.mybatis</groupId>
         <artifactId>yipuran-mybatis</artifactId>
-        <version>4.8</version>
+        <version>4.9</version>
     </dependency>
 </dependencies>
 ```
@@ -35,6 +35,6 @@ repositories {
 }
 
 dependencied {
-    compile 'org.yipuran.mybatis:yipuran-mybatis:4.8'
+    compile 'org.yipuran.mybatis:yipuran-mybatis:4.9'
 }
 ```
