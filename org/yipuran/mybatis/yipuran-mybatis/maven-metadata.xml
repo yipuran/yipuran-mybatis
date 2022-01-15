@@ -3,7 +3,7 @@
   <groupId>org.yipuran.mybatis</groupId>
   <artifactId>yipuran-mybatis</artifactId>
   <versioning>
-    <release>4.8</release>
+    <release>4.9</release>
     <versions>
       <version>4.0</version>
       <version>4.1</version>
@@ -15,7 +15,8 @@
       <version>4.6</version>
       <version>4.7</version>
       <version>4.8</version>
+      <version>4.9</version>
     </versions>
-    <lastUpdated>20211107031850</lastUpdated>
+    <lastUpdated>20220115140252</lastUpdated>
   </versioning>
 </metadata>
