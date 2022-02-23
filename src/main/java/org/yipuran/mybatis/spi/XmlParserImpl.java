@@ -17,6 +17,7 @@ import javax.xml.parsers.SAXParserFactory;
  * 解析対象 XMLファイル baseName と、AbstractXmlHandler インスタンスをコンストラクタで受け取る。
  * @param <T> XML解析結果オブジェクトGeneric
  */
+@SuppressWarnings("rawtypes")
 final class XmlParserImpl<T> implements XmlParser{
 	private String baseName;
 	AbstractXmlHandler<T> handler;

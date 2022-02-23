@@ -28,8 +28,9 @@ public abstract class IBatisDaoPlus extends IBatisDao{
 	 * @param limit LIMIT値
 	 * @return List<T>
 	 */
+	@SuppressWarnings("rawtypes")
 	@QueryLimited
-   public <T> List<T> selectBounds(String sqlid, int offset, int limit){
+	public <T> List<T> selectBounds(String sqlid, int offset, int limit){
 		final List<T> list = new ArrayList<T>();
 		try{
 			getSqlSession().select(sqlid, null, new RowBounds(offset, limit), new ResultHandler(){
@@ -51,7 +52,7 @@ public abstract class IBatisDaoPlus extends IBatisDao{
 			session.close();
 		}
 		return list;
-   }
+	}
 	/**
 	 * parameter指定、RowBoundsクエリ.
 	 * sqlidが指すSQLMap のselect に、抽出条件のパラメータを指定する。
@@ -62,6 +63,7 @@ public abstract class IBatisDaoPlus extends IBatisDao{
 	 * @param limit LIMIT値
 	 * @return List<T>
 	 */
+	@SuppressWarnings("rawtypes")
 	@QueryLimited
 	public <T> List<T> selectBounds(String sqlid, Object param, int offset, int limit){
 		final List<T> list = new ArrayList<T>();
