@@ -12,18 +12,43 @@ import org.yipuran.util.EnumBase;
 
 /**
  * コード値内包 enum タイプハンドラ.
+ * <pre>
  * コード値参照方法を org.yipuran.util.EnumBase インターフェース実装で提供している enum のタイプハンドラ
+ *
+ * public enum Color implements EnumBase&lt;Color&gt; {
+ *   :
+ * }
+ *
+ * &lt;typeHandlers&gt;
+ *    &lt;typeHandler handler="org.yipuran.mybatis.types.EnumValueTypeHandler" javaType="sample.Color"/&gt;
+ * &lt;/typeHandlers&gt;
+ * もしくは、
+ *
+ * package sample.types;
+ * public class ColorEnumTypeHandler extends EnumValueTypeHandler&lt;Color&gt;{
+ *   public ColorEnumTypeHandler() {
+ *      super(Color.class);
+ *   }
+ * }
+ *
+ *  &lt;typeHandlers&gt;
+ *       &lt;package name="sample.types"/&gt;
+ *  &lt;/typeHandlers&gt;
+ * </pre>
  * @param <E>
  */
 public class EnumValueTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E>{
 	private Class<EnumBase<E>> cls;
 
+	public EnumValueTypeHandler() {
+	}
 	/**
 	 * コンストラクタ.
-	 * @param cls enumクラス
+	 * @param cls enumのEnumBase実装クラス
 	 */
-	public EnumValueTypeHandler(Class<EnumBase<E>> cls) {
-		this.cls = cls;
+	@SuppressWarnings("unchecked")
+	public EnumValueTypeHandler(Class<? extends EnumBase<E>> cls) {
+		this.cls = (Class<EnumBase<E>>)cls;
 	}
 	@SuppressWarnings("unchecked")
 	@Override

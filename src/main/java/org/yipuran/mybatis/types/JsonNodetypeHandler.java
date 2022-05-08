@@ -20,6 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JsonNodetypeHandler extends BaseTypeHandler<JsonNode>{
 	private ObjectMapper mapper;
 	private Class<JsonNode> clazz;
+	public JsonNodetypeHandler() {
+	}
 	/**
 	 * コンストラクタ.
 	 * @param clazz Class JsonNode

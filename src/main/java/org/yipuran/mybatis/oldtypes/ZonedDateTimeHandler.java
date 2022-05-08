@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.yipuran.mybatis.types;
+package org.yipuran.mybatis.oldtypes;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

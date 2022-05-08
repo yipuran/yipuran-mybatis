@@ -21,57 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.yipuran.mybatis.types;
+package org.yipuran.mybatis.oldtypes;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.time.LocalTime;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.GregorianCalendar;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 
 /**
- * Map Java 8 LocalTime &lt;-&gt; java.sql.Time
+ * Map Java 8 LocalDateTime &lt;-&gt; java.sql.Timestamp
  */
-@MappedTypes(LocalTime.class)
-public class LocalTimeHandler extends BaseTypeHandler<LocalTime> {
+@MappedTypes(LocalDateTime.class)
+public class LocalDateTimeHandler extends BaseTypeHandler<LocalDateTime> {
 
 	@Override
-	public void setNonNullParameter(PreparedStatement ps, int i, LocalTime parameter, JdbcType jdbcType) throws SQLException {
+	public void setNonNullParameter(PreparedStatement ps, int i, LocalDateTime parameter, JdbcType jdbcType) throws SQLException {
 		if (parameter == null) {
-			ps.setTime(i, null);
+			ps.setTimestamp(i, null);
 		}else{
-			ps.setTime(i, Time.valueOf(parameter));
+			ps.setTimestamp(i, Timestamp.valueOf(parameter), GregorianCalendar.from(ZonedDateTime.of(parameter, ZoneId.systemDefault())));
 		}
 	}
 
 	@Override
-	public LocalTime getNullableResult(ResultSet rs, String columnName) throws SQLException {
-		Time time = rs.getTime(columnName);
-		if (time != null) {
-			return time.toLocalTime();
-		}
-		return null;
-	}
-
-	@Override
-	public LocalTime getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-		Time time = rs.getTime(columnIndex);
-		if (time != null) {
-			return time.toLocalTime();
+	public LocalDateTime getNullableResult(ResultSet rs, String columnName) throws SQLException {
+		Timestamp ts = rs.getTimestamp(columnName);
+		if (ts != null) {
+			return LocalDateTime.ofInstant(ts.toInstant(), ZoneId.systemDefault());
 		}
 		return null;
 	}
 
 	@Override
-	public LocalTime getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-		Time time = cs.getTime(columnIndex);
-		if (time != null) {
-			return time.toLocalTime();
+	public LocalDateTime getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+		Timestamp ts = rs.getTimestamp(columnIndex);
+		if (ts != null) {
+			return LocalDateTime.ofInstant(ts.toInstant(), ZoneId.systemDefault());
+		}
+		return null;
+	}
+
+	@Override
+	public LocalDateTime getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+		Timestamp ts = cs.getTimestamp(columnIndex);
+		if (ts != null) {
+			return LocalDateTime.ofInstant(ts.toInstant(), ZoneId.systemDefault());
 		}
 		return null;
 	}

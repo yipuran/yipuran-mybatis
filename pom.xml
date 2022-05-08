@@ -2,7 +2,7 @@
 <modelVersion>4.0.0</modelVersion>
 <groupId>org.yipuran.mybatis</groupId>
 <artifactId>yipuran-mybatis</artifactId>
-<version>4.10</version>
+<version>4.11</version>
 
 <name>yipuran-mybatis</name>
 <url>https://github.com/yipuran/yipuran-mybatis</url>
@@ -42,6 +42,11 @@
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
       <version>${guice.version}</version>
+   </dependency>
+   <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-guice</artifactId>
+      <version>[3.16,)</version>
    </dependency>
    <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
