@@ -35,6 +35,6 @@ repositories {
 }
 
 dependencied {
-    compile 'org.yipuran.mybatis:yipuran-mybatis:4.12'
+    compile 'org.yipuran.mybatis:yipuran-mybatis:4.13'
 }
 ```
